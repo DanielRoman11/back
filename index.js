@@ -169,11 +169,12 @@ const authMiddleware = async(req, res, next) =>{
   });
 
   decoded
-    .then(async data =>{
-      const { id } = data;
+    .then(async ({ id }) =>{
 
-      const user = await User.findByPk(id)
+      const user = await User.findByPk(id);
       if(!user) return res.redirect('/register');
+
+      req.auth = user;
 
       next();
     })
@@ -184,5 +185,8 @@ const authMiddleware = async(req, res, next) =>{
 }
 
 app.get('/', authMiddleware, (req, res) =>{
-  res.render('index')
+  const user = req.auth;
+  res.render('index',{
+    username: user.username
+  })
 })
