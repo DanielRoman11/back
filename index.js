@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import path from 'path';
 import * as url from 'url';
 import cookieParser from 'cookie-parser';
+import { error } from 'console';
 
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -53,7 +54,7 @@ const User = db.define('users', {
 });
 
 User.prototype.validPassword = async function(password) {
-  return await bcrypt.compare(password, this.password)
+  return await bcrypt.compare(password, this.password);
 }
 
 await db.authenticate()
@@ -79,8 +80,8 @@ app.get('/register', (req, res) =>{
 app.post('/register', async(req, res)=>{
   try {
     const { username, email, password} = req.body;
-    console.log(req.body);
-    if(username === "" || email === "" || password === ""){
+    
+    if(username === "" || email === "" || password === undefined){
       return res.render('register', {
         errors: {error: 'All fields required'},
         username,
@@ -108,27 +109,80 @@ app.post('/register', async(req, res)=>{
   }
 })
 
-const createJWT = (user) =>{
-  return jwt.sign({id: user.id}, SECRET_KEY, {
-    expiresIn: '1d',
+const createJWT = ({id}, check) =>{
+  return jwt.sign({id}, SECRET_KEY, {
+    expiresIn: check ? '3d' : '1d',
   })
 }
 
 app.get('/login', (req, res) =>{
-  res.render('login')
+  res.render('login');
 })
 app.post('/login', async(req, res) =>{
-  const { email, password } = req.body;
-  const user = await User.findOne({where: {email}})
-    .then((result) => {
-      const token = createJWT(user.id)
+  try {
+    const { email, password } = req.body;
 
-      res.redirect('/')
-    }).catch((err) => {
-      console.error(err);
-    });
+    const checkboxValue = req.body.miCheckbox === 'on' ? true : false;
+
+    if(email === "" || password === undefined){
+      return res.render('login', {
+        errors: {error: 'All fields required'},
+        email
+      })
+    }
+  
+    await User.findOne({where: {email}})
+      .then(async user => {
+        if(!user) return res.render('login', {
+          errors: {error: 'User not found'},
+          email
+        })
+        
+        if(!await user.validPassword(password)){
+          return res.render('login',{
+            errors: {error: 'Password incorrect!'},
+            email
+          })
+        }
+        const token = createJWT(user, checkboxValue);
+        
+        res.cookie('_token', token).redirect('/')
+      });
+  } catch (error) {
+    throw new Error(error)
+  }
 })
 
-app.get('/', (req, res) =>{
+const authMiddleware = async(req, res, next) =>{
+  const { _token } = req.cookies;
+
+  const decoded = new Promise((resolve, reject) => {
+    if(_token){
+      jwt.verify(_token, SECRET_KEY, (err, decoded) =>{
+        if(err) reject(err);
+        else resolve(decoded)
+      })
+    }
+    else{
+      reject(new Error('Token not found'))
+    }
+  });
+
+  decoded
+    .then(async data =>{
+      const { id } = data;
+
+      const user = await User.findByPk(id)
+      if(!user) return res.redirect('/register');
+
+      next();
+    })
+    .catch(err =>{
+      console.error(err);
+      res.redirect('/register');
+    });
+}
+
+app.get('/', authMiddleware, (req, res) =>{
   res.render('index')
 })
