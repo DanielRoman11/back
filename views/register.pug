@@ -1,0 +1,18 @@
+extends layouts/_bootstrap
+append styles
+	// Custom styles for this template
+	link(href='/css/signin.css', rel='stylesheet')
+
+block body
+	.container
+		form(class="form-signin" action="/register" method="post" novalidate)
+			h2.form-signin-heading Please sign up
+			label.sr-only(for='email') Email address
+			input.form-control(type='email', placeholder='Email address', autofocus='true' name='email' value= email ? email : '')
+			label.sr-only(for='username') Name
+			input.form-control(type='text', placeholder='Username', required='true', autofocus='true' name='username' value= username ? username : '')
+			label.sr-only(for='inputPassword') Password
+			input.form-control(type='password', placeholder='Password')
+			button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign up
+			if errors
+				p=errors.error
