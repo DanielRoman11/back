@@ -78,7 +78,7 @@ app.get('/register', (req, res) =>{
 })
 app.post('/register', async(req, res)=>{
   try {
-    const { username, email,  password} = req.body;
+    const { username, email, password} = req.body;
     console.log(req.body);
     if(username === "" || email === "" || password === ""){
       return res.render('register', {
@@ -125,7 +125,7 @@ app.post('/login', async(req, res) =>{
 
       res.redirect('/')
     }).catch((err) => {
-      
+      console.error(err);
     });
 })
 

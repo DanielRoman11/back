@@ -11,8 +11,8 @@ block body
 			input.form-control(type='email', placeholder='Email address', autofocus='true' name='email' value= email ? email : '')
 			label.sr-only(for='username') Name
 			input.form-control(type='text', placeholder='Username', required='true', autofocus='true' name='username' value= username ? username : '')
-			label.sr-only(for='inputPassword') Password
-			input.form-control(type='password', placeholder='Password')
+			label.sr-only(for='password') Password
+			input.form-control(type='password', placeholder='Password' name='password')
 			button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign up
 			if errors
 				p=errors.error
