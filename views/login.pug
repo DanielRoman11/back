@@ -15,6 +15,8 @@ block body
 				input(type='checkbox' name="miCheckbox")
 				|  Remember me
 			button.btn.btn-lg.btn-primary.btn-block(type='submit' form="form") Sign in
+			div
+				a(href="/register") Register
 			if errors
 				p=errors.error
 

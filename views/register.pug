@@ -14,5 +14,7 @@ block body
 			label.sr-only(for='password') Password
 			input.form-control(type='password', placeholder='Password' name='password')
 			button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign up
+			div
+				a(href="/login") Log in 
 			if errors
 				p=errors.error
