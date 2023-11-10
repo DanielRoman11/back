@@ -137,10 +137,16 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 370px;
   max-height: 780px;
+  overflow: hidden;
 }
 .dashboard-container iframe{
   width: 100%;
-  min-height: 370px;
+  height: 500px;
+}
+
+@media (min-width: 501px ) {
+  .dashboard-container iframe{
+    height: 780px;
+  }
 }
