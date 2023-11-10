@@ -187,8 +187,7 @@ const authMiddleware = async(req, res, next) =>{
 app.get('/', authMiddleware, async(req, res) =>{
   const user = req.auth;
 
-  const users = await User.findAll()
-
+  const users = await User.findAll();
 
   res.render('index',{
     username: user.username,

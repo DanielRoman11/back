@@ -38,11 +38,20 @@ block body
 						a(href='#') Analytics
 					li
 						a(href='#') Export
-				h4.sub-header Users
 				ul.nav.nav-sidebar
-					each user in users
-						li
-							a(href=`/chat/${user.id}`)= user.username
+					li
+						a(
+							data-bs-toggle="collapse" 
+							href="#collapseExample" 
+							role="button" 
+							aria-expanded="false" 
+							aria-controls="collapseExample"
+							) Users
+						div(class="collapse" id="collapseExample")
+							each user in users
+								ul(class="nav flex-column")
+									li(class="nav-item")
+										a(class="nav-link active" aria-current="page" href=`/chat/${user.id}`)= user.username
 				ul.nav.nav-sidebar
 					li
 						a(href='') Nav item again
@@ -51,8 +60,8 @@ block body
 					li
 						a(href='') Another nav item
 			.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-				h3.welcome-title Welcome 
-					span.welcome-span #{username} !
+				h3.welcome-title Welcome! 
+					span.welcome-span= username
 				h1.page-header Dashboard
 				//- pre= JSON.stringify(users, null, 2)
 				div.dashboard-container
