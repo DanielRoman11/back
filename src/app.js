@@ -6,9 +6,6 @@ import db from './config/database.js';
 import userRoutes from "./routes/user.Router.js";
 import indexRoutes from './routes/index.Router.js';
 
-
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
 const app = express();
 
 await db.authenticate()
@@ -19,10 +16,11 @@ await db.authenticate()
     console.error(err);
   });
 
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 app.locals.basedir = path.join(__dirname, 'views');
 
+app.set('views', './views');
 app.set('view engine', 'pug');
-app.set('views', 'views');
 
 app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
