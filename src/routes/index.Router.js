@@ -7,4 +7,4 @@ const routes = express.Router();
 routes.get('/', authMiddleware, dashboard);
 routes.post('/', authMiddleware, postDashboard);
 
-export default routes
+export default routes;

@@ -19,7 +19,7 @@ export const authMiddleware = async(req, res, next) =>{
     .then(async ({ id }) =>{
 
       const user = await User.findByPk(id);
-      if(!user) return res.redirect('/register');
+      if(!user) return res.redirect('/auth/register');
 
       req.auth = user;
 
@@ -27,6 +27,6 @@ export const authMiddleware = async(req, res, next) =>{
     })
     .catch(err =>{
       console.error(err);
-      res.redirect('/register');
+      res.redirect('/auth/register');
     });
 }

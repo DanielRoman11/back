@@ -1,9 +1,9 @@
 import app from "./src/app.js";
 
-function main (){
-  const PORT = process.env.PORT
+const PORT = process.env.PORT
+function main(){
   app.listen(PORT, ()=>{
-    console.log('SERVER ON PORT: http://localhost:', PORT);
+    console.log(`SERVER ON PORT: http://localhost:${PORT}`);
   })
 }
 main()

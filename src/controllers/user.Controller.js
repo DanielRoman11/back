@@ -1,13 +1,13 @@
 import { createJWT } from "../helpers/tokens.js";
 import User from "../models/User.js";
 
-export const registerForm = (req, res) =>{ res.render('register') };
+export const registerForm = (req, res) =>{ res.render('auth/register') };
 export const register = async(req, res)=>{
   try {
     const { username, email, password} = req.body;
     
     if(username === "" || email === "" || password === undefined){
-      return res.render('register', {
+      return res.render('auth/register', {
         errors: {error: 'All fields required'},
         username,
         email
@@ -16,7 +16,7 @@ export const register = async(req, res)=>{
   
     const user = await User.findOne({where: {email}})
     if(user) {
-      return res.render('register', {
+      return res.render('auth/register', {
         errors: {error: 'User already registered'}
       })
     }
@@ -27,14 +27,14 @@ export const register = async(req, res)=>{
       password
     })
       .then(()=>{
-        res.redirect('/login')
+        res.redirect('/auth/login')
       })
   } catch (error) {
     throw new Error(error)
   }
 }
 
-export const loginForm = (req, res) =>{ res.render('login') }
+export const loginForm = (req, res) =>{ res.render('auth/login') }
 export const login = async(req, res) =>{
   try {
     const { email, password } = req.body;
@@ -42,7 +42,7 @@ export const login = async(req, res) =>{
     const checkboxValue = req.body.miCheckbox === 'on' ? true : false;
 
     if(email === "" || password === undefined){
-      return res.render('login', {
+      return res.render('auth/login', {
         errors: {error: 'All fields required'},
         email
       })
@@ -50,13 +50,13 @@ export const login = async(req, res) =>{
   
     await User.findOne({where: {email}})
       .then(async user => {
-        if(!user) return res.render('login', {
+        if(!user) return res.render('auth/login', {
           errors: {error: 'User not found'},
           email
         })
         
         if(!await user.validPassword(password)){
-          return res.render('login',{
+          return res.render('auth/login',{
             errors: {error: 'Password incorrect!'},
             email
           })
