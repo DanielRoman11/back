@@ -4,7 +4,6 @@ import * as url from 'url';
 import cookieParser from 'cookie-parser';
 import db from './config/database.js';
 import userRoutes from "./routes/user.Router.js";
-import { env } from 'process';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
