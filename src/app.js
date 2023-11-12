@@ -19,7 +19,7 @@ await db.authenticate()
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 app.locals.basedir = path.join(__dirname, 'views');
 
-app.set('views', './views');
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
 
 app.use(cookieParser());
