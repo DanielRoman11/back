@@ -194,3 +194,12 @@ app.get('/', authMiddleware, async(req, res) =>{
     users: users
   })
 })
+
+app.post('/', authMiddleware, async(req, res) =>{
+  const user = req.auth;
+
+  
+  const users = await User.findAll();
+  
+  res.render()
+})

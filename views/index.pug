@@ -11,7 +11,7 @@ block body
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
-				a.navbar-brand(href='#') Project name 
+				a.navbar-brand(href='/') Team Work
 			#navbar.navbar-collapse.collapse
 				ul.nav.navbar-nav.navbar-right
 					li
@@ -22,8 +22,7 @@ block body
 						a(href='#') Profile
 					li
 						a(href='#') Help
-				form.navbar-form.navbar-right
-					input.form-control(type='text', placeholder='Search...')
+
 	.container-fluid
 		.row
 			.col-sm-3.col-md-2.sidebar
@@ -49,7 +48,7 @@ block body
 							) Users
 						div(class="collapse" id="collapseExample")
 							each user in users
-								ul(class="nav flex-column")
+								summary(class="nav flex-column")
 									li(class="nav-item")
 										a(class="nav-link active" aria-current="page" href=`/chat/${user.id}`)= user.username
 				ul.nav.nav-sidebar
@@ -77,8 +76,9 @@ block body
 							each user in users
 								tr
 									td= user.id
-									td= user.username
+									td
+										a(href=`/overview/${user.id}` class="link-underline-warning link-offset-3")= user.username
 									td= user.email
 									td Inaccesible 🔐
 									td= new Date(user.createdAt).toLocaleString()
-									td= new Date(user.updatedAt).toLocaleString()
+									td= new Date(user.updatedAt).toLocaleString() 

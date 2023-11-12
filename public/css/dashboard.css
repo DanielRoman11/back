@@ -147,6 +147,11 @@ body {
 
 @media (min-width: 501px ) {
   .dashboard-container iframe{
-    height: 780px;
+    height: 380px;
+  }
+}
+@media (min-width: 1024px ) {
+  .dashboard-container iframe{
+    height: 580px;
   }
 }
