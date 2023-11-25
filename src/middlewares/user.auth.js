@@ -1,11 +1,12 @@
 import User from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 export const authMiddleware = async(req, res, next) =>{
   const { _token } = req.cookies;
 
   const decoded = new Promise((resolve, reject) => {
     if(_token){
-      jwt.verify(_token, SECRET_KEY, (err, decoded) =>{
+      jwt.verify(_token, process.env.JWT_SECRET, (err, decoded) =>{
         if(err) reject(err);
         else resolve(decoded)
       })

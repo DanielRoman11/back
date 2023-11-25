@@ -1,11 +1,11 @@
-extends ../layouts/_bootstrap
-append styles
-	// Custom styles for this template
-	link(href='/css/signin.css', rel='stylesheet')
+extends ../layouts/index
 
-block body
-	.container
-		form(class="form-signin" action="/register" method="post" novalidate)
+block styles
+	link(href='/css/styles.css' rel='stylesheet')
+
+block content
+	.container.my-5
+		form(class="form-signin" action="/auth/register" method="post" novalidate)
 			h2.form-signin-heading Please sign up
 			label.sr-only(for='email') Email address
 			input.form-control(type='email', placeholder='Email address', autofocus='true' name='email' value= email ? email : '')
@@ -13,8 +13,9 @@ block body
 			input.form-control(type='text', placeholder='Username', required='true', autofocus='true' name='username' value= username ? username : '')
 			label.sr-only(for='password') Password
 			input.form-control(type='password', placeholder='Password' name='password')
-			button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign up
-			div
-				a(href="/login") Log in 
+			button.btn.btn-lg.btn-primary.btn-block.mt-2(type='submit') Sign up
+			.block
+				a(href="/auth/login") Log in 
+			
 			if errors
-				p=errors.error
+				p.text-bg-warning.p-3.mt-2=errors.error

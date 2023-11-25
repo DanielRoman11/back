@@ -15,7 +15,7 @@ await db.authenticate()
   .catch(err =>{
     console.error(err);
   });
-
+  
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 app.locals.basedir = path.join(__dirname, 'views');
 
@@ -24,8 +24,10 @@ app.set('view engine', 'pug');
 
 app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
-app.use(express.static('public'));
-app.use(express.static('../node_modules/bootstrap'));
+
+app.use(express.static(__dirname+'public'))
+
+
 
 app.use('/auth', userRoutes);
 app.use('/', indexRoutes);

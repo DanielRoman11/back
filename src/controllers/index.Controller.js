@@ -1,18 +1,11 @@
 import User from "../models/User.js";
 
-export const dashboard = async(req, res) =>{
+export const home = async(req, res) =>{
   const user = req.auth;
   const users = await User.findAll();
 
-  res.render('index',{
+  res.render('home',{
     username: user.username,
     users: users
   })
-}
-
-export const postDashboard = async(req, res) =>{
-  const user = req.auth;
-  const users = await User.findAll();
-  
-  res.render()
 }

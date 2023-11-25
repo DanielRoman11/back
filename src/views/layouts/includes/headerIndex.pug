@@ -1,0 +1,30 @@
+nav(data-bs-theme="dark").navbar.bg-dark.border-bottom.border-body
+  .container-fluid
+    a.navbar-brand(href='/') Bloggee
+    button.navbar-toggler(type='button' data-bs-toggle='offcanvas' data-bs-target='#offcanvasNavbar' aria-controls='offcanvasNavbar' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #offcanvasNavbar.offcanvas.offcanvas-end(tabindex='-1' aria-labelledby='offcanvasNavbarLabel')
+      .offcanvas-header
+        h5#offcanvasNavbarLabel.offcanvas-title Offcanvas
+        button.btn-close(type='button' data-bs-dismiss='offcanvas' aria-label='Close')
+      .offcanvas-body
+        ul.navbar-nav.justify-content-end.flex-grow-1.pe-3
+          li.nav-item
+            a.nav-link.active(aria-current='page' href='#') Home
+          li.nav-item
+            a.nav-link(href='#') Link
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+              | Dropdown
+            ul.dropdown-menu
+              li
+                a.dropdown-item(href='#') Action
+              li
+                a.dropdown-item(href='#') Another action
+              li
+                hr.dropdown-divider
+              li
+                a.dropdown-item(href='#') Something else here
+        form.d-flex.mt-3(role='search')
+          input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
+          button.btn.btn-outline-success(type='submit') Search
