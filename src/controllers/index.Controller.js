@@ -5,7 +5,7 @@ export const home = async(req, res) =>{
   const users = await User.findAll();
 
   res.render('home',{
-    username: user.username,
-    users: users
+    user,
+    users
   })
 }

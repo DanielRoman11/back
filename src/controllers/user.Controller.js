@@ -69,3 +69,10 @@ export const login = async(req, res) =>{
     throw new Error(error)
   }
 }
+
+export const profilePage = (req, res) =>{
+  const user = req.auth;
+  res.render('profile/profileSettings',{
+    user
+  })
+}

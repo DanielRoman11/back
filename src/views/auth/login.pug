@@ -1,11 +1,11 @@
-extends ../layouts/index
+extends ../layouts/auth
 append styles
 	// Custom styles for this template
 	//- link(href='/css/signin.css', rel='stylesheet')
 block content
 	.container.my-5
 		form#form(method="post" novalidate).form-signin
-			img.mb-4(src='#' alt='' width='72' height='72')
+			img.mb-4.mx-auto.mw-100(src='/images/bell-bailando.gif' alt='Bell Y Ais bailando' width="600"  height="300")
 			h1.h3.mb-3.font-weight-normal Please sign in
 			label.sr-only(for='inputEmail') Email address
 			input#inputEmail.form-control(type='email' placeholder='Email address' name='email' autofocus='example@email.com' value= email ? email : '')

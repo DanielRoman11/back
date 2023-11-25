@@ -1,4 +1,4 @@
-extends ../layouts/index
+extends ../layouts/auth
 
 block styles
 	link(href='/css/styles.css' rel='stylesheet')
@@ -6,7 +6,8 @@ block styles
 block content
 	.container.my-5
 		form(class="form-signin" action="/auth/register" method="post" novalidate)
-			h2.form-signin-heading Please sign up
+			img.mb-4.mx-auto.mw-100(src='/images/hestia-bailando.gif' alt='Hestia y Bell bailando' width="600"  height="300")
+			h1.form-signin-heading Please sign up
 			label.sr-only(for='email') Email address
 			input.form-control(type='email', placeholder='Email address', autofocus='true' name='email' value= email ? email : '')
 			label.sr-only(for='username') Name
