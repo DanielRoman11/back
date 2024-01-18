@@ -1,7 +1,7 @@
 # back
 ## ENG
 ### Summary
-This is a practical project where we will show how to do authentication, authorization and how to connect to a database through docker-compose. The project will also show an integration of the Microsoft PowerBi tool. It is expected that one of the incrementals of the project is that when entering the project after authentication, it will be possible to see a dashboard with the data of the user who entered, filtered to access only information that has a relationship with the user.
+This is a practical project where I'll show how to do authentication, authorization and how to connect to a database through docker-compose. The project will also show an integration of the Microsoft PowerBi tool. It is expected that one of the incrementals of the project is that when entering the project after authentication, it will be possible to see a dashboard with the data of the user who entered, filtered to access only information that has a relationship with the user.
 
 ### Incremetals
 - Filter the PowerBi dashboard information only with the data of the logged in user.
